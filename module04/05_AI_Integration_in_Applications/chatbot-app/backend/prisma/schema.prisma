@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ChatSession {
+  id        String    @id @default(uuid())
+  messages  Message[]
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@map("chat_sessions")
+}
+
+model Message {
+  id        String      @id @default(uuid())
+  role      String
+  content   String
+  session   ChatSession @relation(fields: [sessionId], references: [id])
+  sessionId String      @map("session_id")
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  @@map("messages")
+}
