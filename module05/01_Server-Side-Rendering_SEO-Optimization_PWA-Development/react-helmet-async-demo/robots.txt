@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (if any)
+# Disallow: /admin
+
+# Point to sitemap (optional, for real projects)
+Sitemap: http://localhost:5173/sitemap.xml
