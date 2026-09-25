@@ -1,0 +1,32 @@
+enum Role {
+    READER
+    EDITOR
+}
+
+model User {
+    id Int @id @default(autoincrement())
+
+    email    String  @unique
+    password String?
+
+    role Role @default(READER)
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+    posts     Post[]
+    accounts  Account[]
+
+    @@map("users")
+}
+
+model Account {
+    id                Int    @id @default(autoincrement())
+    provider          String // e.g. "google"
+    providerAccountId String @map("provider_account_id")
+    userId            Int    @map("user_id")
+    user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+    @@map("accounts")
+}

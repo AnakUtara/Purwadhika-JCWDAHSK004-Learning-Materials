@@ -1,0 +1,16 @@
+model Post {
+    id         String  @id @default(nanoid(12))
+    title      String
+    slug       String  @unique
+    content    String
+    is_premium Boolean @default(false)
+
+    authorId Int  @map("author_id")
+    author   User @relation(fields: [authorId], references: [id])
+
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+
+    @@map("posts")
+}
