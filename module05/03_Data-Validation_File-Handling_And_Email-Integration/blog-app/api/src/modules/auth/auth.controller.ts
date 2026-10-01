@@ -11,7 +11,7 @@ import {
 import cookieConfig from "../../configs/cookie.config.ts";
 import type { AuthPayload } from "../../types/jwt-payload.type.ts";
 import AppError from "../../errors/app.error.ts";
-import { signInSchema, signUpSchema } from "../../validators/auth.validator.ts";
+
 import EmailService from "../email/email.service.ts";
 import renderTemplate from "../../libs/handlebars.ts";
 

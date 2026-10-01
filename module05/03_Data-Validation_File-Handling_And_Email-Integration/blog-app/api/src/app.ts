@@ -7,7 +7,9 @@ import express, {
 	type Response,
 } from "express";
 import cors from "cors";
-import appErrorHandler from "./errors/app-error.handler.ts";
+import appErrorHandler, {
+	errorNormalizer,
+} from "./errors/app-error.handler.ts";
 import { APP_NAME, CLIENT_URL } from "./configs/env.config.ts";
 import authRouter from "./routers/auth.router.ts";
 import cookieParser from "cookie-parser";
@@ -45,6 +47,6 @@ app.use((_req: Request, res: Response) => {
 	res.status(404).json({ message: "Not found" });
 });
 
-app.use(appErrorHandler);
+app.use(errorNormalizer, appErrorHandler);
 
 export default app;

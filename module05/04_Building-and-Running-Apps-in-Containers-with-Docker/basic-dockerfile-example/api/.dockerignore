@@ -1,0 +1,27 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Environment/Secrets (CRITICAL)
+.env
+.env.local
+.env.*.local
+
+# Git
+.git
+.gitignore
+
+# Build Outputs
+dist
+build
+.next
+.expo
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# OS Junk
+Thumbs.db
+.DS_Store

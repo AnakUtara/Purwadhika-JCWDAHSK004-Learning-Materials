@@ -1,0 +1,28 @@
+volumes:
+  pg_dev_data:
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:3000"
+    container_name: api-dev
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    depends_on:
+      - pg_db
+    env_file:
+      - ./api/.env.development.local
+
+  pg_db:
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_dev_data:/var/lib/postgresql/data
+    env_file:
+      - ./api/.env.development.local
+    container_name: pgdb-dev
